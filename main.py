@@ -20,8 +20,15 @@ app = FastAPI(
     description="Fetch countries, currencies, and exchange rates — and computes estimated GDP values.",
     version="1.0.0",
 )
-
-engine = create_engine(config.SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
+print(config.SQLALCHEMY_DATABASE_URL)
+engine = create_engine(
+    config.SQLALCHEMY_DATABASE_URL,
+    pool_pre_ping=True,  # Reuses alive connections
+    pool_size=5,  # Maintain a few connections
+    max_overflow=10,  # Allow extra if needed
+    pool_recycle=1800,  # Recycle every 30 mins
+    connect_args={"ssl": {"ssl_mode": "REQUIRED"}},
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 models.Base.metadata.create_all(bind=engine)
 
