@@ -1,9 +1,21 @@
+import asyncio
 import random
 
 import httpx
 
 COUNTRIES_API = "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies"
 EXCHANGE_API = "https://open.er-api.com/v6/latest/USD"
+
+
+def run_async(coro):
+    """Helper to run async coroutine in a thread-safe way."""
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            return asyncio.run_coroutine_threadsafe(coro, loop).result()
+        return loop.run_until_complete(coro)
+    except RuntimeError:
+        return asyncio.run(coro)
 
 
 def compute_estimated_gdp(population: int, exchange_rate: float | None) -> float | None:
