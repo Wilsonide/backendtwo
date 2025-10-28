@@ -59,6 +59,23 @@ To set up and run this project locally, follow these steps:
     ```
     The API will then be accessible at the specified port, typically `http://localhost:8000`.
 
+### Environment Variables
+
+The project requires the following environment variables to be set, typically in a `.env` file in the project root:
+
+- `DB_USER`: Your MySQL database username.
+  `DB_USER=root`
+- `DB_PASSWORD`: Your MySQL database password.
+  `DB_PASSWORD=your_mysql_password`
+- `DB_HOST`: The hostname of your MySQL database server.
+  `DB_HOST=localhost`
+- `DB_PORT`: The port your MySQL database server is listening on.
+  `DB_PORT=3306`
+- `DB_NAME`: The name of the database to connect to.
+  `DB_NAME=country_db`
+- `PORT`: The port the FastAPI application will run on. (Defaults to 8000 if not set)
+  `PORT=8000`
+
 ## API Documentation
 
 ### Base URL
