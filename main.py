@@ -142,4 +142,4 @@ def status(db: Annotated[Session, Depends(get_db)]):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=config.PORT, reload=True)
+    uvicorn.run("main:app", host="localhost", port=config.PORT)
